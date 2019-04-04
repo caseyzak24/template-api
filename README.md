@@ -11,3 +11,6 @@ How Allen likes to develop python apps (offer improvements please)
 `$ ./interact.sh`
 
 ### Perpetually run tests with `ptw`
+
+### Teardown containers
+`$ docker-compose down`
