@@ -1,0 +1,6 @@
+version: "3.7"
+services:
+  app:
+    build:
+      target: development
+    command: tail -f Dockerfile  # this just keeps the app container alive
