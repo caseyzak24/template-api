@@ -1,2 +1,13 @@
-.pytest_cache
 .idea
+*.env
+*__pycache__*
+.pyc
+.pytest_cache
+rate-data-*.tgz
+kubeconfig
+values.yaml
+.testmondata
+.tmontmp
+.coverage
+htmlcov
+
