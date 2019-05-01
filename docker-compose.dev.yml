@@ -4,3 +4,5 @@ services:
     build:
       target: dev
     command: tail -f Dockerfile  # this just keeps the app container alive
+    volumes:
+    - ${PWD}:/app  # lets you

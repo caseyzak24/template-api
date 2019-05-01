@@ -3,12 +3,9 @@ services:
   app:
     build:
       context: .
-      target: production
+      target: prod
     image: example
     container_name: app
-    volumes:
-      - ${PWD}:/example
-    working_dir: /example
     depends_on:
       - db
     ports:
