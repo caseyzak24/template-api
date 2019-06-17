@@ -10,4 +10,6 @@ FROM base AS dev
 RUN poetry install
 
 FROM base as prod
-# Copy stuff
+COPY src src
+COPY wsgi.py wsgi.py
+CMD uwsgi --ini app.ini
