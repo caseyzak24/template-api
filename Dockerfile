@@ -1,11 +1,13 @@
 FROM python:3.7 AS base
 WORKDIR /app
-RUN pip install sqlalchemy psycopg2 pandas numpy flask
-# etc.
+RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+ENV PATH="${PATH}:/root/.poetry/bin"
+RUN poetry config settings.virtualenvs.create false
+COPY poetry.lock pyproject.toml /app/
+RUN poetry install --no-dev
 
 FROM base AS dev
-RUN pip install pytest pytest-watch pytest-testmon pytest-cov ipython
+RUN poetry install
 
 FROM base as prod
 # Copy stuff
-
