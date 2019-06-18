@@ -17,6 +17,7 @@ fileConfig(config.config_file_name)
 # add your model's MetaData object here
 # for 'autogenerate' support
 from src.model import Base
+from src.bind import engine
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
@@ -38,7 +39,7 @@ def run_migrations_offline():
 
     """
     context.configure(
-        url=str(target_metadata.bind.url), target_metadata=target_metadata, literal_binds=True
+        url=str(engine.url), target_metadata=target_metadata, literal_binds=True
     )
 
     with context.begin_transaction():
@@ -52,7 +53,7 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
-    connectable = target_metadata.bind
+    connectable = engine
 
     with connectable.connect() as connection:
         context.configure(

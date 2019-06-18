@@ -5,6 +5,4 @@ services:
       target: dev
     command: tail -f Dockerfile  # this just keeps the app container alive
     volumes:
-    - ${PWD}:/app  # lets you
-    ports:
-    - 8080:8080
+    - ${PWD}:/app

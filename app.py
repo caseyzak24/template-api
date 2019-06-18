@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, Response, request
-from .bind import session_scope
-from .model import Model
+from src.bind import session_scope
+from src.model import Model
 
 
 class BaseAppException(Exception):

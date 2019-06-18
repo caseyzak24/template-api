@@ -7,4 +7,4 @@ services:
       - "${PWD}/e2e:/e2e"
     depends_on:
       - app
-    command: pytest -v /e2e/test.py
+    command: pytest -v /e2e/e2e_test.py

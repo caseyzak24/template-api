@@ -1,9 +1,18 @@
 import requests
+import time
+import pytest
 
 
 url = 'http://172.17.0.1:8080/'
 
 
-def test_healthz():
+@pytest.fixture(scope='module')
+def healthz():
+    while requests.get(url + 'healthz').status_code != 200:
+        time.sleep(1)
+    return
+
+
+def test_healthz(healthz):
     resp = requests.get(url + 'healthz')
-    assert resp.status_code == 200
+    assert resp.json()['healthy'] == True

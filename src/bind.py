@@ -1,4 +1,4 @@
-from .settings import postgres_password, postgres_database, postgres_host, postgres_user
+from src.settings import postgres_password, postgres_database, postgres_host, postgres_user
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from contextlib import contextmanager

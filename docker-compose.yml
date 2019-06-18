@@ -9,16 +9,18 @@ services:
     depends_on:
       - db
     ports:
-      - 80:8080
-  db:
-    restart: always
-    image: postgres
-    container_name: postgres
+      - 8080:80
     environment:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_HOST=postgres
       - POSTGRES_DATABASE=postgres
       - ALEMBIC_REVISION=head
+  db:
+    restart: always
+    image: postgres
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
     ports:
       - 5432:5432

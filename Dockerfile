@@ -11,5 +11,6 @@ RUN poetry install
 
 FROM base as prod
 COPY src src
-COPY wsgi.py wsgi.py
-CMD uwsgi --ini app.ini
+COPY alembic alembic
+COPY wsgi.py server.ini alembic.ini app.py /app/
+CMD uwsgi --ini server.ini
