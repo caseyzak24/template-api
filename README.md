@@ -1,4 +1,4 @@
-How Allen likes to develop python web services (offer improvements please)
+Starting Point for Web APIs
 -
 
 ### Get in a shell in your development container
@@ -6,3 +6,6 @@ How Allen likes to develop python web services (offer improvements please)
 
 ### Perpetually run tests
 `$ scripts/test-continuous.sh`
+
+### E2E tests
+`$ scripts/e2e.sh`
