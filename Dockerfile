@@ -12,5 +12,5 @@ RUN poetry install
 FROM base as prod
 COPY src src
 COPY alembic alembic
-COPY wsgi.py server.ini alembic.ini app.py /app/
-CMD uwsgi --ini server.ini
+COPY wsgi.py alembic.ini app.py /app/
+CMD gunicorn --workers 2 --worker-class sanic.worker.GunicornWorker --bind 0.0.0.0:80 wsgi

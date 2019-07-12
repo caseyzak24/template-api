@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, Response, request
+from sanic import Sanic
+from sanic.response import json
 from src.bind import session_scope
 from src.model import Model
 
@@ -22,21 +23,21 @@ class BaseAppException(Exception):
         return d
 
 
-application = Flask(__name__)
+application = Sanic(__name__)
 
 
-@application.errorhandler(BaseAppException)
+@application.exception(BaseAppException)
 def handle_app_exception(error):
-    resp = jsonify(error.to_dict())
+    resp = json(error.to_dict())
     resp.status_code = error.status_code
     return resp
 
 
 @application.route('/model', methods=['GET'])
-def model():
+async def model(request):
     with session_scope() as sesh:
         m_model = sesh.query(Model).get(request.args['id'])
-    return jsonify({
+    return json({
         'id': m_model.id,
         'time_created': m_model.time_created,
         'foo': m_model.foo,
@@ -45,13 +46,13 @@ def model():
 
 
 @application.route('/healthz', methods=['GET'])
-def healthz():
+async def healthz(request):
     """Check if service is up.
     """
     with session_scope() as sesh:
         sesh.execute('SELECT 1')
-    return jsonify({'healthy': True})
+    return json({'healthy': True})
 
 
 if __name__ == '__main__':
-    application.run(host='0.0.0.0', port=80)
+    application.run(host='0.0.0.0', port=8000)
