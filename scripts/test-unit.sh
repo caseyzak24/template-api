@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-pytest -v --cov=. test
+pytest -v --cov=src test
