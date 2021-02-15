@@ -4,6 +4,8 @@ from alembic import context
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path.cwd()))
+from src.model import metadata
+from src.bind import engine
 
 
 # this is the Alembic Config object, which provides
@@ -16,9 +18,8 @@ fileConfig(config.config_file_name)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-from src.model import Base
-from src.bind import engine
-target_metadata = Base.metadata
+
+target_metadata = metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
