@@ -15,7 +15,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_HOST=postgres
       - POSTGRES_DATABASE=postgres
-      - ALEMBIC_REVISION=head
+      - APP_SCHEMA=public
   db:
     restart: always
     image: postgres

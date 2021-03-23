@@ -9,3 +9,4 @@ kubeconfig
 .coverage
 htmlcov
 .venv
+*.DS_Store

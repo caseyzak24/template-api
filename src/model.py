@@ -1,12 +1,14 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
 from sqlalchemy.orm import validates
-from sqlalchemy import Column, Integer, String, UniqueConstraint, DateTime
+from sqlalchemy import Column, Integer, String, UniqueConstraint, DateTime, MetaData
+from .settings import postgres_schema
 from alembic.config import Config as AlembicConfig
 import alembic.command as alc
 
 
-Base = declarative_base()
+metadata = MetaData(schema=postgres_schema)
+Base = declarative_base(metadata=metadata)
 
 
 class Model(Base):
@@ -14,12 +16,10 @@ class Model(Base):
     __tablename__ = 'model'
     __table_args__ = (
         UniqueConstraint('foo', 'bar'),
-        {'schema': 'baz'}
     )
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     time_created = Column(DateTime, server_default=func.now(), nullable=False)
-
     foo = Column(String, nullable=False)
     bar = Column(String, nullable=False)
 

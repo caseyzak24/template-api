@@ -1,13 +1,6 @@
-"""empty message
-
-Revision ID: 8e9d2dd2e8e8
-Revises: 
-Create Date: 2019-06-18 01:48:15.982317
-
-auto-generated with `alembic revision --autogenerate`
-"""
 from alembic import op
 import sqlalchemy as sa
+from src.settings import postgres_schema
 
 
 # revision identifiers, used by Alembic.
@@ -16,9 +9,11 @@ down_revision = None
 branch_labels = None
 depends_on = None
 
+schema = postgres_schema
+
 
 def upgrade():
-    op.execute('create schema baz')
+    op.execute(f"CREATE SCHEMA IF NOT EXISTS {postgres_schema}")
     op.create_table(
         'model',
         sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
@@ -27,10 +22,10 @@ def upgrade():
         sa.Column('bar', sa.String(), nullable=False),
         sa.PrimaryKeyConstraint('id'),
         sa.UniqueConstraint('foo', 'bar'),
-        schema='baz'
+        schema=schema
     )
 
 
 def downgrade():
-    op.drop_table('model', schema='baz')
-    op.execute(f'drop schema baz')
+    op.drop_table('model', schema=schema)
+    op.execute(f"DROP SCHEMA IF EXISTS {postgres_schema} CASCADE")

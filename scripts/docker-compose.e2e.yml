@@ -1,10 +1,13 @@
 version: '3.7'
 services:
   client:
-    container_name: client
-    image: allenlawrence94/e2e-client
-    volumes:
-      - "${PWD}/e2e:/e2e"
+    build:
+      context: .
+      target: test
+    image: example-e2e
+    container_name: e2e-test
     depends_on:
       - app
-    command: pytest -v /e2e/e2e_test.py
+    command: /bin/bash -c "./wait-for-it.sh app:80 && pytest -v test/test_e2e/"
+  app:
+    command: /bin/bash -c "./wait-for-it.sh postgres:5432 && uwsgi --ini server.ini"
